@@ -1,5 +1,6 @@
 import java.awt.Canvas;
 import java.awt.Graphics;
+import java.awt.Color;
 import javax.swing.JFrame;
 
 /**
@@ -19,10 +20,12 @@ public class GraphicsTest extends Canvas {
 
     public void paint(Graphics g) {
         double angle = 0.0;
-        for (int x = 0; x <= 256; x += 8) {
-            double y = 50 + (Math.sin(angle) * 35.0);
+        for (int x = 0; x <= 1024; x += 8) {
+            double y = 150 + (Math.sin(angle) * 35.0);
             System.out.println("y = " +  y);
-            g.fillRect(x, (int) y, 4, 8);
+            Color rainbow = new Color(x/2, 200, 200);
+            g.setColor(rainbow);
+            g.fillRect(x, (int) y, 4, 64);
             angle += Math.PI/40.0;
         }
     }
