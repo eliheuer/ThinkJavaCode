@@ -2,6 +2,8 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Color;
 import javax.swing.JFrame;
+import java.util.Random;
+import java.text.DecimalFormat;
 
 /**
  * Graphics Test
@@ -13,6 +15,7 @@ public class GraphicsTest extends Canvas {
         JFrame frame = new JFrame("Graphics Test");
         Canvas GraphicsTest = new GraphicsTest();
         GraphicsTest.setSize(256, 256);
+        GraphicsTest.setBackground(Color.BLACK);
         frame.add(GraphicsTest);
         frame.pack();
         frame.setVisible(true);
@@ -21,12 +24,26 @@ public class GraphicsTest extends Canvas {
     public void paint(Graphics g) {
         double angle = 0.0;
         for (int x = 0; x <= 1024; x += 8) {
-            double y = 150 + (Math.sin(angle) * 35.0);
-            System.out.println("y = " +  y);
-            Color rainbow = new Color(x/2, 200, 200);
+
+            // Set y-position from sin of angle.
+            double y = 64 + (Math.sin(angle) * 55.0);
+
+            // generate a random color with HSB.
+            Random r = new Random();
+            double hue = r.nextDouble();
+            float h = (float) hue; // hue
+            float s = (float) 1.0; // saturation
+            float b = (float) 1.0; // brightness
+
+            // Set color and draw rectangle.
+            Color rainbow = Color.getHSBColor(h, s, b);
             g.setColor(rainbow);
-            g.fillRect(x, (int) y, 4, 64);
-            angle += Math.PI/40.0;
+            g.fillRect(x, (int)y, 5, 100);
+            g.fillOval(x * 2, ((int)y+200), 32, 32);
+
+            // Update angle for next ineration.
+            angle += Math.PI/12.0;
+
         }
     }
 }
