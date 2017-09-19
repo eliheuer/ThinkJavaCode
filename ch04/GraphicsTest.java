@@ -18,9 +18,12 @@ public class GraphicsTest extends Canvas {
     }
 
     public void paint(Graphics g) {
-        for (int i = 20; i < 256; i += 10) {
-            g.fillOval(i, (i/2), 32, 32);
-            g.fillRect((i/2), i, 32, 32);
+        double angle = 0.0;
+        for (int x = 0; x <= 256; x += 8) {
+            double y = 50 + (Math.sin(angle) * 35.0);
+            System.out.println("y = " +  y);
+            g.fillRect(x, (int) y, 4, 8);
+            angle += Math.PI/40.0;
         }
     }
 }
